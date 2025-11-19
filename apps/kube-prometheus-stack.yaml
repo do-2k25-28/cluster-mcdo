@@ -17,6 +17,9 @@ spec:
         namespace: monitoring
       interval: 5m
   releaseName: kube-prometheus-stack
+  values:
+    alertmanager:
+      enabled: false
 ---
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
