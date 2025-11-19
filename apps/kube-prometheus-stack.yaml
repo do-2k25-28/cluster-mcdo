@@ -27,7 +27,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: Host(`grafana.phoenix.dopolytech.fr`)
+    - match: Host(`grafana.polydo.dev`)
       kind: Rule
       services:
         - name: kube-prometheus-stack-grafana
