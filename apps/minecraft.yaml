@@ -21,4 +21,4 @@ spec:
       repository: itzg/mc-proxy
     minecraftProxy:
       type: VELOCITY
-      velocityVersion: 1.1.0
+      velocityVersion: 3.4.0-SNAPSHOT
