@@ -1,0 +1,30 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: mc-router
+  namespace: minecraft
+spec:
+  interval: 1h
+  timeout: 5m
+  chart:
+    spec:
+      chart: mc-router
+      version: 1.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: minecraft-server-charts
+        namespace: minecraft
+      interval: 5m
+  releaseName: mc-router
+  values:
+    image:
+      tag: 1.36.2
+    services:
+      minecraft:
+        type: LoadBalancer
+        port: 80
+    minecraftRouter:
+      mappings:
+        - externalHostname: mc-do3.polydo.dev
+          host: perseus.dopolytech.fr
+          port: 25567
