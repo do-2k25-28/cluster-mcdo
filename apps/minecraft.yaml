@@ -1,24 +1,26 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: velocity
+  name: mc-router
   namespace: minecraft
 spec:
   interval: 1h
   timeout: 5m
   chart:
     spec:
-      chart: minecraft-proxy
-      version: '3.9.0'
+      chart: mc-router
+      version: '1.4.0'
       sourceRef:
         kind: HelmRepository
         name: minecraft-server-charts
         namespace: minecraft
       interval: 5m
-  releaseName: velocity
+  releaseName: mc-router
   values:
     image:
-      repository: itzg/mc-proxy
-    minecraftProxy:
-      type: VELOCITY
-      velocityVersion: 3.4.0-SNAPSHOT
+      tag: v1.36.2
+      minecraftRouter:
+        mappings:
+          - externalHostname: mc-do3.polydo.dev
+            host: perseus.dopolytech.fr
+            port: 25567
