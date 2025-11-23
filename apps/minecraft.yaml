@@ -19,8 +19,8 @@ spec:
   values:
     image:
       tag: 1.36.2
-      minecraftRouter:
-        mappings:
-          - externalHostname: mc-do3.polydo.dev
-            host: perseus.dopolytech.fr
-            port: 25567
+    minecraftRouter:
+      mappings:
+        - externalHostname: mc-do3.polydo.dev
+          host: perseus.dopolytech.fr
+          port: 25567
