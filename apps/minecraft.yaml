@@ -19,6 +19,10 @@ spec:
   values:
     image:
       tag: 1.36.2
+    services:
+      minecaft:
+        type: LoadBalancer
+        port: 80
     minecraftRouter:
       mappings:
         - externalHostname: mc-do3.polydo.dev
