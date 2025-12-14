@@ -1,0 +1,10 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: messagerie
+  namespace: messagerie
+spec:
+  interval: 5m
+  image: gitlab.polytech.umontpellier.fr:5050/dev-web/messagerie-instantane
+  secretRef:
+    name: gitlab-registry

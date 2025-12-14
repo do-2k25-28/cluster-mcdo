@@ -20,7 +20,7 @@ spec:
       - name: gitlab-registry
     image:
       repository: gitlab.polytech.umontpellier.fr:5050/dev-web/messagerie-instantane
-      tag: latest
+      tag: latest # {"$imagepolicy": "messagerie:messagerie"}
       pullPolicy: IfNotPresent
     service:
       type: ClusterIP
