@@ -1,0 +1,57 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: messagerie
+  namespace: messagerie
+spec:
+  interval: 1h
+  timeout: 5m
+  releaseName: messagerie
+  chart:
+    spec:
+      chart: helm/messagerie
+      sourceRef:
+        kind: GitRepository
+        name: messagerie
+        namespace: messagerie
+      interval: 5m
+  values:
+    imagePullSecrets:
+      - name: gitlab-registry
+    image:
+      repository: gitlab.polytech.umontpellier.fr:5050/dev-web/messagerie-instantane
+      tag: latest
+      pullPolicy: IfNotPresent
+    service:
+      type: ClusterIP
+      apiPort: 3000
+      frontPort: 8081
+    env:
+      apiPort: 3000
+      frontPort: 8081
+      frontOrigin: https://messagerie.polydo.dev
+      frontOrigins: https://messagerie.polydo.dev
+      database:
+        host: messagerie-postgresql.messagerie.svc.cluster.local
+        user: admin
+        name: instant_mess
+    secrets:
+      jwtSecret: Qn2eF4tX9mSPaW7vD0CfzR6hYJ1MUgTwBkGq8KLC3oNViHxA5ObpEjrsluZyId
+      pepper: uS7gR9pAq3Mx1vZKFw82nTJDyH0eLbCPfQ6rUhVoWtNiEO4sBmGlkYdz5XcjaI
+      databasePassword: mfa-debian
+    ingress:
+      enabled: true
+      className: traefik
+      annotations:
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      tls:
+        - secretName: cloudflare-origin-cert
+          hosts:
+            - messagerie.polydo.dev
+            - api-messagerie.polydo.dev
+      frontend:
+        host: messagerie.polydo.dev
+        path: /
+      api:
+        host: api-messagerie.polydo.dev
+        path: /

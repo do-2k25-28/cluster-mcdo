@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: messagerie
+  namespace: messagerie
+spec:
+  interval: 1h
+  url: https://gitlab.polytech.umontpellier.fr/dev-web/messagerie-instantane.git
+  ref:
+    branch: main

@@ -1,0 +1,27 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: messagerie-postgresql
+  namespace: messagerie
+spec:
+  interval: 1h
+  timeout: 5m
+  releaseName: messagerie-postgresql
+  chart:
+    spec:
+      chart: postgresql
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: messagerie
+      interval: 5m
+  values:
+    auth:
+      postgresPassword: mfa-debian
+      username: admin
+      password: mfa-debian
+      database: instant_mess
+    primary:
+      persistence:
+        enabled: true
+        size: 10Gi
