@@ -29,11 +29,11 @@ spec:
     env:
       apiPort: 3000
       frontPort: 8081
-      frontOrigin: https://messagerie.polydo.dev
-      frontOrigins: https://messagerie.polydo.dev
+      frontOrigin: https://instant-chat.polydo.dev
+      frontOrigins: https://instant-chat.polydo.dev
       database:
-        user: messagerie_app
-        name: instant_mess
+        user: instant_chat_app
+        name: instant_chat
       extraEnv:
         - name: COOKIE_SECURE
           value: "true"
@@ -42,14 +42,20 @@ spec:
         - name: COOKIE_DOMAIN
           value: ".polydo.dev"
     secrets:
-      create: false
-      existingSecret: messagerie-secrets
+      create: true
+      existingSecret: instant-chat-secret
+      jwtSecret: wDmqkXPI_N4-lH5H6dbVlcEkpAYdofuSbxDl7Aa1w_hJst_TreYPmHeZdmrH4Xh8e6MiopuLjUwfDxXVA747Yg
+      pepper: vns1BPZsxYNx1lZI4oVT-IEt9w8m9eqVRWqeSq7h7i-giViJH815HT3lSjgMRZVfzYqac4thefaXxtiIzN9GuQ
+      databasePassword: pUXxb4TkefHz0kXC-59jgWP-gQQAyaYRkYHWqODF_wNotPcEuKTT-6vShTTONQtpGHbk_pLK7ANSVe7keCFhtw
+      databaseAdminPassword: 9TuVVq0swCdKfRjJALAqaEIFGAX-jk5FpYH2OViEFtrwByHMlAO9j923xo37Mc6m9O7WFe2sEk3w9JESSACEqQ
     postgresql:
       enabled: true
       auth:
-        username: messagerie_app
-        database: instant_mess
-        existingSecret: messagerie-secrets
+        username: instant_chat_app
+        database: instant_chat
+        existingSecret: instant-chat-secret
+        password: pUXxb4TkefHz0kXC-59jgWP-gQQAyaYRkYHWqODF_wNotPcEuKTT-6vShTTONQtpGHbk_pLK7ANSVe7keCFhtw
+        postgresPassword: 9TuVVq0swCdKfRjJALAqaEIFGAX-jk5FpYH2OViEFtrwByHMlAO9j923xo37Mc6m9O7WFe2sEk3w9JESSACEqQ
         secretKeys:
           adminPasswordKey: POSTGRES_PASSWORD
           userPasswordKey: DATABASE_PASSWORD
@@ -64,11 +70,11 @@ spec:
       tls:
         - secretName: cloudflare-origin-cert
           hosts:
-            - messagerie.polydo.dev
-            - api-messagerie.polydo.dev
+            - instant-chat.polydo.dev
+            - instant-chat-api.polydo.dev
       frontend:
-        host: messagerie.polydo.dev
+        host: instant-chat.polydo.dev
         path: /
       api:
-        host: api-messagerie.polydo.dev
+        host: instant-chat-api.polydo.dev
         path: /
