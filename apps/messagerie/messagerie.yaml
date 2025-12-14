@@ -32,7 +32,6 @@ spec:
       frontOrigin: https://messagerie.polydo.dev
       frontOrigins: https://messagerie.polydo.dev
       database:
-        host: messagerie-postgresql.messagerie.svc.cluster.local
         user: messagerie_app
         name: instant_mess
       extraEnv:
@@ -43,9 +42,20 @@ spec:
         - name: COOKIE_DOMAIN
           value: ".polydo.dev"
     secrets:
-      jwtSecret: T9d9MfBplnWBgSnc1zgd-FB_f-zwrnjbT_6tyaLqPvwDUnWcxwS1jvmv9qsM8SM-LfZLfpl2kHTZHHFUSgUpsw
-      pepper: Zh6Km-Xdkq1MPwUIt2MVcMqcvv0mtDtdZ4fN77E7gVFHo-vjDY1ypF_ZrT-zyhQzIRHxnAHXnZSqtkDZMAsKLg
-      databasePassword: VjKvdXEJ51r4g_jfSgZs9kCHQi0_7q-SmEsy88me8R-2eacl1JSdONfhnzDc9lVZbCRXyeyiyqhfHEN4pX11Ig
+      create: false
+      existingSecret: messagerie-secrets
+    postgresql:
+      enabled: true
+      auth:
+        username: messagerie_app
+        database: instant_mess
+        existingSecret: messagerie-secrets
+        secretKeys:
+          adminPasswordKey: POSTGRES_PASSWORD
+          userPasswordKey: DATABASE_PASSWORD
+      primary:
+        persistence:
+          size: 20Gi
     ingress:
       enabled: true
       className: traefik

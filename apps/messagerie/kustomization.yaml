@@ -5,5 +5,4 @@ resources:
   - imagerepository.yaml
   - imagepolicy.yaml
   - imageupdate.yaml
-  - postgresql.yaml
   - messagerie.yaml
