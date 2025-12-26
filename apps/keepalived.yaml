@@ -1,0 +1,20 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: keepalived
+  namespace: kube-system
+spec:
+  interval: 1h
+  timeout: 5m
+  chartRef:
+    kind: OCIRepository
+    name: keepalived
+    namespace: kube-system
+  releaseName: keepalived
+  values:
+    config:
+      virtualRouterId: 51
+      interface: eno1
+      password: XJKBk6rf3d34Z
+      virtualIpAddress: 162.38.112.161
+    targetNodes: []
