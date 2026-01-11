@@ -46,15 +46,27 @@ spec:
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_USER
-              value: doplace
+              valueFrom:
+                secretKeyRef:
+                  name: redis
+                  key: username
             - name: REDIS_PASSWORD
-              value: PUNVep5tckSJl2X0yiblViueXQh6a7yH
+              valueFrom:
+                secretKeyRef:
+                  name: redis
+                  key: password
             - name: FRONTEND_ORIGIN
               value: https://place.polydo.dev
             - name: JWT_SECRET
-              value: G9EHIZPNG6U5wc5k0E2OQLN3YHs3AALK
+              valueFrom:
+                secretKeyRef:
+                  name: jwt
+                  key: secret
             - name: HASH_SECRET
-              value: gEsv5ayk1XdnjoJjjpyr56sDGctyI2mI
+              valueFrom:
+                secretKeyRef:
+                  name: argon2
+                  key: secret
             - name: CLUSTER
               value: "true"
           resources:

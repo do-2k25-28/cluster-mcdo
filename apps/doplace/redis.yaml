@@ -22,8 +22,7 @@ metadata:
     app: redis
 data:
   redis.conf: |
-    user default off
-    user doplace on >PUNVep5tckSJl2X0yiblViueXQh6a7yH ~* &* +@all
+    aclfile /etc/redis/users.acl
     loadmodule /opt/redis-stack/lib/rejson.so
     save 900 1
     save 300 10
@@ -77,6 +76,9 @@ spec:
             - name: redis-config
               mountPath: /etc/redis/redis.conf
               subPath: redis.conf
+            - name: redis-acl
+              mountPath: /etc/redis/users.acl
+              subPath: users.acl
             - name: redis-data
               mountPath: /data
           resources:
@@ -100,6 +102,9 @@ spec:
         - name: redis-config
           configMap:
             name: redis-config
+        - name: redis-acl
+          secret:
+            secretName: redis-acl
         - name: redis-data
           persistentVolumeClaim:
             claimName: redis-data
