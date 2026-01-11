@@ -5,3 +5,4 @@ resources:
   - frontend.yaml
   - ingress.yaml
   - redis.yaml
+  - secrets.yaml
